@@ -120,7 +120,7 @@ private_instance_id=$(aws ec2 run-instances \
     --image-id ami-053b0d53c279acc90 \
     --instance-type t2.micro \
     --subnet-id $private_subnet_id \
-    --key-name poridhi \
+    --key-name alamin \
     --security-group-ids $sg_id \
     --region $AWS_REGION \
     --output json \
