@@ -74,8 +74,6 @@ private_route_table_id=$(aws ec2 create-route-table --vpc-id $vpc_id --output js
 private_route_table_id=$(echo "$private_route_table_id" | sed 's/"//g')
 aws ec2 create-tags --resources $private_route_table_id --tags Key=Name,Value=robotics-private-route-table --output json
 echo "Success Private Route Table with ID: $private_route_table_id"
-
-aws ec2 create-route --route-table-id $private_route_table_id --destination-cidr-block "30.30.0.0/16" --instance-id $local_target_instance_id --region $AWS_REGION --output json
 echo "Default route added to Route Table for Internet access."
 #------------------End Create oublic route  table and attach Internet Gateway in the Route Table-------
 
