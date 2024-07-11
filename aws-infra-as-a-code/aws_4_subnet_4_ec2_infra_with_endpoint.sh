@@ -64,8 +64,7 @@ public_route_table_id=$(echo "$public_route_table_id" | sed 's/"//g')
 aws ec2 create-tags --resources $public_route_table_id --tags Key=Name,Value=robotics-public-route-table --output json
 echo "Success Public Route Table with ID: $public_route_table_id"
 
-assign_igw=$(aws ec2 create-route --route-table-id $public_route_table_id --destination-cidr-block "0.0.0.0/0" --gateway-id $gateway_id --region $AWS_REGION --output json --query 'Return')
-assign_private_ip=$(aws ec2 create-route --route-table-id $public_route_table_id --destination-cidr-block "30.30.0.0/16" --instance-id $local_target_instance_id --output json --region $AWS_REGION --query 'Return')
+aws ec2 create-route --route-table-id $public_route_table_id --destination-cidr-block "0.0.0.0/0" --gateway-id $gateway_id --region $AWS_REGION --output json
 echo "Success Public route added to Route Table for Internet access."
 #------------------End Create oublic route  table and attach Internet Gateway in the Route Table-------
 
@@ -76,7 +75,7 @@ private_route_table_id=$(echo "$private_route_table_id" | sed 's/"//g')
 aws ec2 create-tags --resources $private_route_table_id --tags Key=Name,Value=robotics-private-route-table --output json
 echo "Success Private Route Table with ID: $private_route_table_id"
 
-assign_private_ip=$(aws ec2 create-route --route-table-id $private_route_table_id --destination-cidr-block "30.30.0.0/16" --instance-id $local_target_instance_id --output json --region $AWS_REGION --query 'Return')
+aws ec2 create-route --route-table-id $private_route_table_id --destination-cidr-block "30.30.0.0/16" --instance-id $local_target_instance_id --region $AWS_REGION --output json
 echo "Default route added to Route Table for Internet access."
 #------------------End Create oublic route  table and attach Internet Gateway in the Route Table-------
 
